@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="Smart Chat" Height="350" Width="525" MaxHeight="500" MaxWidth="700" MinHeight="500" MinWidth="700">
+    <Grid Background="#FF2D2D30">
+        <TextBlock x:Name="TypeMessage_TextBlock" HorizontalAlignment="Left" Margin="10,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="74" Width="525" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"/>
+        <ListBox x:Name="ListOfPartisipants_ListBox" HorizontalAlignment="Left" Height="449" Margin="540,10,0,0" VerticalAlignment="Top" Width="142">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding newList}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="ChatSpace_ListBox" HorizontalAlignment="Left" Height="345" Margin="10,10,0,0" VerticalAlignment="Top" Width="525"/>
+        <Button x:Name="SendMessage_Button" Content="Send" HorizontalAlignment="Left" Margin="435,439,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="ParticipantTyping_Lable" Content="Label" HorizontalAlignment="Left" Margin="10,327,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BotSDK;
 
 namespace Chat
 {
@@ -22,7 +23,17 @@ namespace Chat
     {
         public MainWindow()
         {
+
+            addtolist();
+            Model model = new Model();
+            model.GetParticipantName();
             InitializeComponent();
+        }
+
+        List<string> newList = new List<string>();
+        void addtolist()
+        {
+            newList.Add("Sasha");
         }
     }
 }

@@ -26,8 +26,9 @@ namespace Chat
 
             addtolist();
             Model model = new Model();
-            model.GetParticipantName();
+            model.GetAllBots();
             InitializeComponent();
+            ListOfParticipants_ListBox.ItemsSource = model.Participants;
         }
 
         List<string> newList = new List<string>();

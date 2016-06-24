@@ -8,10 +8,10 @@
         Title="Smart Chat" Height="350" Width="525" MaxHeight="500" MaxWidth="700" MinHeight="500" MinWidth="700">
     <Grid Background="#FF2D2D30">
         <TextBlock x:Name="TypeMessage_TextBlock" HorizontalAlignment="Left" Margin="10,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="74" Width="525" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"/>
-        <ListBox x:Name="ListOfPartisipants_ListBox" HorizontalAlignment="Left" Height="449" Margin="540,10,0,0" VerticalAlignment="Top" Width="142">
+        <ListBox x:Name="ListOfParticipants_ListBox" HorizontalAlignment="Left" Height="449" Margin="540,10,0,0" VerticalAlignment="Top" Width="142">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding newList}"/>
+                    <Label Content="{Binding}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -18,9 +18,33 @@ namespace Istredd
                 return name;
             }
         }
+
+        Dictionary<string, string> Answers;
+
+        public Istredd()
+        {
+            Answers = new Dictionary<string, string>();
+            fillDictionary();
+        }
+       
+        void fillDictionary()
+        {
+            Answers.Add("Hi", "Alloha");
+            Answers.Add("Hello", "Good morning!");
+            Answers.Add("How are you?", "Thanks, I'm well, and you?");
+        }
+
         public string Answer(string Message)
         {
-            string answer = "Hello";
+            string answer = null;
+            if (Answers.TryGetValue(Message, out answer))
+            {
+                answer = Answers[Message];
+            }
+            else
+            {
+                answer = ")";
+            }
             return answer;
         }
 

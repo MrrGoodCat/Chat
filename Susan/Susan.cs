@@ -9,7 +9,7 @@ namespace Susan
 {
     public class Susan : IBot
     {
-        string name = "Susan";
+        string name = "Susanna";
 
         public string Name
         {
@@ -19,17 +19,31 @@ namespace Susan
             }
         }
 
-        Dictionary<string, string> Answers = new Dictionary<string, string>();
+        Dictionary<string, string> Answers;
 
+        public Susan()
+        {
+            Answers = new Dictionary<string, string>();
+            fillDictionary();
+        }
+        
         void fillDictionary()
         {
-            Answers.Add("Hi", "Hello");
-            Answers.Add("Hello", "Hello");
-            Answers.Add("How are you?", "Thanks, I'm well, and you?");
+            Answers.Add("Hi", "Alloha, Susan");
+            Answers.Add("Hello", "Good morning!, Susan");
+            Answers.Add("How are you?", "Thanks, I'm well, and you?, Susan");
         }
         public string Answer(string Message)
         {
-            string answer = "Hello";
+            string answer = null;
+            if (Answers.TryGetValue(Message, out answer))
+            {
+                answer = Answers[Message];
+            }
+            else
+            {
+                answer = ")";
+            }           
             return answer;
         }
     }

@@ -19,9 +19,33 @@ namespace Stark
             }
         }
 
+        Dictionary<string, string> Answers;
+
+        public Stark()
+        {
+            Answers = new Dictionary<string, string>();
+            fillDictionary();
+        }
+
+         
+
+        void fillDictionary()
+        {
+            Answers.Add("Hi", "Alloha, Stark");
+            Answers.Add("Hello", "Good morning!, Stark");
+            Answers.Add("How are you?", "Thanks, I'm well, and you?, Stark");
+        }
         public string Answer(string Message)
         {
-            string answer = "Hello";
+            string answer = null;
+            if (Answers.TryGetValue(Message, out answer))
+            {
+                answer = Answers[Message];
+            }
+            else
+            {
+                answer = ")";
+            }
             return answer;
         }
     }

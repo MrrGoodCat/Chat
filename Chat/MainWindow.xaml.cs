@@ -21,20 +21,22 @@ namespace Chat
     /// </summary>
     public partial class MainWindow : Window
     {
+        Model model;
         public MainWindow()
         {
-
-            addtolist();
-            Model model = new Model();
+            model = new Model();
             model.GetAllBots();
             InitializeComponent();
             ListOfParticipants_ListBox.ItemsSource = model.Participants;
         }
 
-        List<string> newList = new List<string>();
-        void addtolist()
+        private void SendMessage_Button_Click(object sender, RoutedEventArgs e)
         {
-            newList.Add("Sasha");
+            ChatSpace_ListBox.Items.Add(TypeMessage_TextBox.Text);
+            
+            ChatSpace_ListBox.Items.Add(model.GetAnswer(TypeMessage_TextBox.Text));
+            TypeMessage_TextBox.Text = null;
         }
+
     }
 }

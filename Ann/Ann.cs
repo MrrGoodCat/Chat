@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BotSDK;
 
-namespace Stark
+namespace Ann
 {
-    public class Stark : IBot
+    public class Ann : IBot
     {
-        string name = "Stark";
+        string name = "Ann";
 
         public string Name
         {
@@ -21,7 +21,7 @@ namespace Stark
 
         DataBase db;
 
-        public Stark()
+        public Ann()
         {
             db = new DataBase();
         }

@@ -19,31 +19,23 @@ namespace Istredd
             }
         }
 
-        Dictionary<string, string> Answers;
+        DataBase db;
 
         public Istredd()
         {
-            Answers = new Dictionary<string, string>();
-            fillDictionary();
-        }
-       
-        void fillDictionary()
-        {
-            Answers.Add("Hi", "Alloha");
-            Answers.Add("Hello", "Good morning!");
-            Answers.Add("How are you?", "Thanks, I'm well, and you?");
+            db = new DataBase();
         }
 
         public string Answer(string Message)
         {
             string answer = null;
-            if (Answers.TryGetValue(Message, out answer))
+            if (db.Answers.TryGetValue(Message, out answer))
             {
-                answer = Answers[Message];
+                answer = db.Answers[Message];
             }
             else
             {
-                answer = ")";
+                answer = "Item wasn't found!";
             }
             return answer;
         }

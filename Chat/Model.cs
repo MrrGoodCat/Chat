@@ -83,13 +83,21 @@ namespace Chat
             foreach (var Dll in ListOfDlls)
             {
                 object obj;
-
                 obj = Activator.CreateInstance(GetBotType(Dll));
                 foreach (MethodInfo method in GetBotType(Dll).GetMethods())
                 {
                     if (method.Name.Equals("Answer"))
                     {
-                        answer = GetParticipantName(Dll) + ": " + method.Invoke(obj, new object[] { quastion }).ToString();
+                        string tempResponse = method.Invoke(obj, new object[] { quastion }).ToString();
+                        if (tempResponse == "Item wasn't found!")
+                        {
+                            if (Dll == ListOfDlls.Last())
+                            {
+                                return null;
+                            }
+                            continue;
+                        }
+                        answer = GetParticipantName(Dll) + ": " + tempResponse;
                         return answer;
                     }
                 }

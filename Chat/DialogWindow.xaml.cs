@@ -41,8 +41,15 @@ namespace Chat
 
         private void Ok_Button_Click(object sender, RoutedEventArgs e)
         {
-            Text = UserName_TextBox.Text;
-            Close();
+            if (!String.IsNullOrWhiteSpace(UserName_TextBox.Text))
+            {
+                Text = UserName_TextBox.Text;
+                Close();
+            }
+            else
+            {
+                Cancel_Button_Click(sender, e);
+            }         
         }
 
         private void UserName_TextBox_KeyDown(object sender, KeyEventArgs e)

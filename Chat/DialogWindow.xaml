@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chat"
         mc:Ignorable="d"
-        Title="User Name" Height="135.86" Width="300">
+        Title="User Name" Height="135.86" Width="300" MinWidth="300" MinHeight="135.86" MaxHeight="135.86" MaxWidth="300" ResizeMode="NoResize" Icon="Images/1466697159_1-06.png" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="Dialog_label" Content="Enter your name:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="UserName_TextBox" HorizontalAlignment="Center" Height="23" Margin="0,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" KeyDown="UserName_TextBox_KeyDown"/>

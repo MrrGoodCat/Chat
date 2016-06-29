@@ -11,15 +11,28 @@ namespace Chat
 {
     public class Model
     {
-        public List<string> Participants;
-        List<string> ListOfDlls;
+        List<string> participants;
         Assembly asm;
         string folgerPath = @"Bots";
+
+        public List<string> Participants
+        {
+            get
+            {
+                return participants;
+            }
+
+            set
+            {
+                participants = value;
+            }
+        }
+        public List<Type> Bots;
 
         public Model()
         {
             Participants = new List<string>();
-            ListOfDlls = new List<string>();
+            Bots = new List<Type>();
             GetAllDllsInFolder();
         }
 
@@ -44,60 +57,54 @@ namespace Chat
             {
                 if (GetBotType(item) != null)
                 {
-                    ListOfDlls.Add(item);
+                    Bots.Add(GetBotType(item));
                 }
             }
-
-            //ListOfDlls.AddRange(Directory.GetFiles(folgerPath, "*.dll", SearchOption.AllDirectories));
         }
-        
-        public string GetParticipantName(string pathToDll)
+
+        string GetBotName(Type botType)
         {
-            string participant = null;
-            object obj;
-
-                obj = Activator.CreateInstance(GetBotType(pathToDll));
-                foreach (PropertyInfo property in GetBotType(pathToDll).GetProperties())
+            string botName = null;
+            object obj = Activator.CreateInstance(botType);
+            foreach (PropertyInfo property in botType.GetProperties())
+            {
+                if (property.Name.Equals("Name"))
                 {
-                    if (property.Name.Equals("Name"))
-                    {
-                        participant = property.GetValue(obj).ToString();
-                    }
+                    botName = property.GetValue(obj).ToString();
                 }
-
-            return participant;
+            }
+            return botName;
         }
-
 
         public void GetAllBots()
         {
-            foreach (var Dll in ListOfDlls)
+            foreach (var bot in Bots)
             {
-                Participants.Add(GetParticipantName(Dll));
+                Participants.Add(GetBotName(bot));
             }
         }
 
         public string GetAnswer(string quastion)
         {
             string answer = null;
-            foreach (var Dll in ListOfDlls)
+            foreach (var bot in Bots)
             {
                 object obj;
-                obj = Activator.CreateInstance(GetBotType(Dll));
-                foreach (MethodInfo method in GetBotType(Dll).GetMethods())
+                obj = Activator.CreateInstance(bot);
+                foreach (MethodInfo method in bot.GetMethods())
                 {
                     if (method.Name.Equals("Answer"))
                     {
                         string tempResponse = method.Invoke(obj, new object[] { quastion }).ToString();
                         if (tempResponse == "Item wasn't found!")
                         {
-                            if (Dll == ListOfDlls.Last())
+                            if (bot == Bots.Last())
                             {
                                 return null;
                             }
                             continue;
                         }
-                        answer = GetParticipantName(Dll) + ": " + tempResponse;
+                        answer = GetBotName(bot) + ": " + tempResponse;
                         return answer;
                     }
                 }

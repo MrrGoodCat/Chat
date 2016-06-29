@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chat"
         mc:Ignorable="d"
-        Title="Smart Chat" Height="350" Width="525" MaxHeight="500" MaxWidth="700" MinHeight="500" MinWidth="700">
+        Title="Smart Chat" Height="350" Width="525" MaxHeight="500" MaxWidth="700" MinHeight="500" MinWidth="700" Icon="Images/1466697159_1-06.png" ResizeMode="CanMinimize">
     <Grid Background="#FF2D2D30">
         <ListBox x:Name="ListOfParticipants_ListBox" HorizontalAlignment="Left" Height="449" Margin="540,10,0,0" VerticalAlignment="Top" Width="142">
             <ListBox.ItemTemplate>

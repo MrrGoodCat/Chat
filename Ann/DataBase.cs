@@ -17,8 +17,8 @@ namespace Ann
 
         void fillDictionary()
         {
-            Answers.Add("Hi", "Alloha");
-            Answers.Add("Hello", "Good morning!");
+            Answers.Add("Good afternoon", "Good afternoon!");
+            Answers.Add("How are you doing?", "Not too bad, thanks! And yourself?");
             Answers.Add("How are you?", "Thanks, I'm well, and you?");
         }
     }

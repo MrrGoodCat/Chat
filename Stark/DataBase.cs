@@ -17,9 +17,9 @@ namespace Stark
 
         void fillDictionary()
         {
-            Answers.Add("Hi", "Alloha");
-            Answers.Add("Hello", "Good morning!");
-            Answers.Add("How are you?", "Thanks, I'm well, and you?");
+            Answers.Add("Hi, All", "Hi!");
+            Answers.Add("Good evening", "Hello!");
+            Answers.Add("How do you do?", "Thanks, I'm well, and you?");
         }
     }
 }

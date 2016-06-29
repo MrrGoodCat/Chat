@@ -17,9 +17,11 @@ namespace Istredd
 
         void fillDictionary()
         {
-            Answers.Add("Hi", "Alloha");
+            Answers.Add("Good morning", "Hi!");
+            Answers.Add("Good morning!", "Hi!");
+            Answers.Add("GM", "Hi!");
             Answers.Add("Hello", "Good morning!");
-            Answers.Add("How are you?", "Thanks, I'm well, and you?");
+            Answers.Add("How's life?", "Thanks, I'm well! How about you?");
         }
     }
 }

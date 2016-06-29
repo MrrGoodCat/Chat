@@ -17,8 +17,8 @@ namespace Susan
 
         void fillDictionary()
         {
-            Answers.Add("Hi", "Alloha");
-            Answers.Add("Hello", "Good morning!");
+            Answers.Add("Hi", "Hello");
+            Answers.Add("Bye", "Good bye, nice to meet you!");
             Answers.Add("How are you?", "Thanks, I'm well, and you?");
         }
     }

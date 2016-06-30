@@ -34,6 +34,7 @@ namespace Chat
             Participants = new List<string>();
             Bots = new List<Type>();
             GetAllDllsInFolder();
+            GetAllBotsNames();
         }
 
         Type GetBotType(string pathToDll)
@@ -76,14 +77,18 @@ namespace Chat
             return botName;
         }
 
-        public void GetAllBots()
+        void GetAllBotsNames()
         {
             foreach (var bot in Bots)
             {
                 Participants.Add(GetBotName(bot));
             }
         }
-
+        /// <summary>
+        /// Get answer from some bot
+        /// </summary>
+        /// <param name="quastion">String message that written by user</param>
+        /// <returns>Returns string response from bot that has answer for question</returns>
         public string GetAnswer(string quastion)
         {
             string answer = null;
@@ -92,9 +97,10 @@ namespace Chat
                 object obj;
                 obj = Activator.CreateInstance(bot);
                 foreach (MethodInfo method in bot.GetMethods())
-                {
+                {   
                     if (method.Name.Equals("Answer"))
                     {
+                        
                         string tempResponse = method.Invoke(obj, new object[] { quastion }).ToString();
                         if (tempResponse == "Item wasn't found!")
                         {

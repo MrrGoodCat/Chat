@@ -27,7 +27,6 @@ namespace Chat
         public MainWindow()
         {
             model = new Model();
-            model.GetAllBots();
             user = new User();            
             InitializeComponent();
             Title = "Smart chat. User: " + user.Name;
@@ -37,10 +36,7 @@ namespace Chat
         private void SendMessage_Button_Click(object sender, RoutedEventArgs e)
         {
             ChatSpace_ListBox.Items.Add(user.Name + ": " + TypeMessage_TextBox.Text);
-            //ChatSpace_ListBox.Items.Refresh();
-
             ChatSpace_ListBox.Items.Add(model.GetAnswer(TypeMessage_TextBox.Text));
-            //Thread.Sleep(2000);
             TypeMessage_TextBox.Text = null;
         }
 

@@ -27,28 +27,28 @@ namespace Chat
                 participants = value;
             }
         }
-        public List<Type> Bots;
+        public List<IBot> Bots;
 
         public Model()
         {
             Participants = new List<string>();
-            Bots = new List<Type>();
+            Bots = new List<IBot>();
             GetAllDllsInFolder();
             GetAllBotsNames();
         }
 
-        Type GetBotType(string pathToDll)
+        IBot GetBotType(string pathToDll)
         {
-            Type type = null;
+            IBot obj = null;
             asm = Assembly.LoadFrom(pathToDll);
             foreach (Type t in asm.GetTypes())
             {
                 if (!t.IsInterface && typeof(IBot).IsAssignableFrom(t))
                 {
-                    type = t;
+                    obj = (IBot)Activator.CreateInstance(t);
                 }
             }
-            return type;
+            return obj;
         }
 
         void GetAllDllsInFolder()
@@ -63,23 +63,14 @@ namespace Chat
             }
         }
 
-        string GetBotName(Type botType)
+        string GetBotName(IBot bot)
         {
-            string botName = null;
-            object obj = Activator.CreateInstance(botType);
-            foreach (PropertyInfo property in botType.GetProperties())
-            {
-                if (property.Name.Equals("Name"))
-                {
-                    botName = property.GetValue(obj).ToString();
-                }
-            }
-            return botName;
+            return bot.Name;
         }
 
         void GetAllBotsNames()
         {
-            foreach (var bot in Bots)
+            foreach (IBot bot in Bots)
             {
                 Participants.Add(GetBotName(bot));
             }
@@ -87,33 +78,24 @@ namespace Chat
         /// <summary>
         /// Get answer from some bot
         /// </summary>
-        /// <param name="quastion">String message that written by user</param>
+        /// <param name="question">String message that written by user</param>
         /// <returns>Returns string response from bot that has answer for question</returns>
-        public string GetAnswer(string quastion)
+        public string GetAnswer(string question)
         {
             string answer = null;
-            foreach (var bot in Bots)
-            {
-                object obj;
-                obj = Activator.CreateInstance(bot);
-                foreach (MethodInfo method in bot.GetMethods())
-                {   
-                    if (method.Name.Equals("Answer"))
+            foreach (IBot bot in Bots)
+            {  
+                string tempResponse = bot.Answer(question);
+                if (tempResponse == "Item wasn't found!")
+                {
+                    if (bot == Bots.Last())
                     {
-                        
-                        string tempResponse = method.Invoke(obj, new object[] { quastion }).ToString();
-                        if (tempResponse == "Item wasn't found!")
-                        {
-                            if (bot == Bots.Last())
-                            {
-                                return null;
-                            }
-                            continue;
-                        }
-                        answer = GetBotName(bot) + ": " + tempResponse;
-                        return answer;
+                        return null;
                     }
+                    continue;
                 }
+                answer = GetBotName(bot) + ": " + tempResponse;
+                return answer;
             }
             return answer;
         }
